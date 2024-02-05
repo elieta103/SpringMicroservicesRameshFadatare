@@ -1,4 +1,4 @@
-# 10 Api Gateway using Spring Cloud Gateway
+# 11 Api Gateway using Spring Cloud Gateway
 
 
 00. EndPoints
