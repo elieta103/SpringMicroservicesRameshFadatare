@@ -17,7 +17,8 @@
 07. Create Simple REST API in employee-service & department-service.
 08. Change department-service and employee-service properties file and call : /busrefresh
     Only one time !!
-09. Employee-Service Activate 
+09. Department-Service Activate Actuator
+    management.endpoints.web.exposure.include=*
 09. Demo.
     - http://localhost:9191/api/employees/message
     - http://localhost:9191/api/departments/message
