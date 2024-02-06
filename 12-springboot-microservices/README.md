@@ -26,7 +26,7 @@
     - spring.application.name=DEPARTMENT-SERVICE
 07. Activar servidor de configuracion
     - spring.config.import=optional:configserver:http://localhost:8888
-08. Activar actuator
+08. Activar actuator en DepartmentService
     - management.endpoints.web.exposure.include=*
 09. Al realizar algun cambio en las configuraciones 
     - Se debe reiniciar el servicio de config-server, no el servicio que tiene el cambio
