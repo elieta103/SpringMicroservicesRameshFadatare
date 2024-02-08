@@ -32,6 +32,7 @@
 - docker pull rabbitmq
 - docker run --rm -it -p 5672:5672 rabbitmq
 - POST : http://localhost:8080/actuator/busrefresh  devuelve 204 NoContent
+- GET  : http://localhost:9191/api/departments/message  http://localhost:8080/api/departments/message, ver cambios de actuator
 
 
 - NOTA IMPORTANTE :
