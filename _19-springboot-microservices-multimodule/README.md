@@ -62,6 +62,16 @@
 - docker run -dp 8888:8888 --name config-server config-server:v1
 - docker run -dp 8761:8761 --name service-registry service-registry:v1
 
+- Este paso de generar los container uno por uno, queda solucionado con :
+```
+    build:
+      context: ./service-registry
+      dockerfile: Dockerfile
+```
+- Se agrega las rutas de cada Dockerfile, solo es necesario :
+  - docker-compose up
+
+
 ### Docker Compose
 - Queda pendiente la Dockerizacion de Micrometer & Zipkin
 - Credenciales Docker : id gresshel, mail gresshel@gmail.com, pwd elieta103

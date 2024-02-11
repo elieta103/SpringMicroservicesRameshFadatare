@@ -38,5 +38,6 @@ public class EmployeeDto {
     @Email(message = "Email de empleado, formato no valido. :(")    // Format of email
     private String email;
 
+    private String departmentCode;
     private String organizationCode;
 }

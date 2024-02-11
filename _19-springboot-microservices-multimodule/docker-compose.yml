@@ -2,7 +2,11 @@ version: '3.7'
 
 services:
   service-registry:
-    image: service-registry:v1
+    container_name: service-registry
+    build:
+      context: ./service-registry
+      dockerfile: Dockerfile
+    #image: service-registry:v1
     ports:
       - "8761:8761"
     networks:
@@ -12,7 +16,11 @@ services:
       eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
 
   api-gateway:
-    image: api-gateway:v1
+    container_name: api-gateway
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    #image: api-gateway:v1
     ports:
       - "9191:9191"
     networks:
@@ -24,7 +32,11 @@ services:
       eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
 
   config-server:
-    image: config-server:v1
+    container_name: config-server
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+    #image: config-server:v1
     ports:
       - "8888:8888"
     networks:
@@ -50,7 +62,11 @@ services:
       MYSQL_DATABASE: department_db
 
   department-service:
-    image: department-service:v1
+    container_name: department-service
+    build:
+      context: ./department-service
+      dockerfile: Dockerfile
+    #image: department-service:v1
     ports:
       - '8080:8080'
     networks:
@@ -65,7 +81,11 @@ services:
       eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
 
   employee-service:
-    image: employee-service:v1
+    container_name: employee-service
+    build:
+      context: ./employee-service
+      dockerfile: Dockerfile
+    #image: employee-service:v1
     ports:
       - '8081:8081'
     networks:
@@ -80,7 +100,11 @@ services:
       eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
 
   organization-service:
-    image: organization-service:v1
+    container_name: organization-service
+    build:
+      context: ./organization-service
+      dockerfile: Dockerfile
+    #image: organization-service:v1
     ports:
       - '8083:8083'
     networks:
@@ -95,7 +119,11 @@ services:
       eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
 
   react-frontend:
-    image: react-frontend:v1
+    container_name: react-frontend
+    build:
+      context: ./react-frontend
+      dockerfile: Dockerfile
+    #image: react-frontend:v1
     ports:
       - "3000:3000"
     networks:
