@@ -1,0 +1,109 @@
+version: '3.7'
+
+services:
+  service-registry:
+    image: service-registry:v1
+    ports:
+      - "8761:8761"
+    networks:
+      - ms-network
+    environment:
+      eureka.instance.hostname: service-registry
+      eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+
+  api-gateway:
+    image: api-gateway:v1
+    ports:
+      - "9191:9191"
+    networks:
+      - ms-network
+    depends_on:
+      - service-registry
+    environment:
+      server.port: 9191
+      eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+
+  config-server:
+    image: config-server:v1
+    ports:
+      - "8888:8888"
+    networks:
+      - ms-network
+    depends_on:
+      - service-registry
+    environment:
+      server.port: 8888
+      eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+
+  mysql-db:
+    image: 'mysql:latest'
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - '3306:3306'
+    networks:
+      - ms-network
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: elieta103
+      MYSQL_DATABASE: department_db
+
+  department-service:
+    image: department-service:v1
+    ports:
+      - '8080:8080'
+    networks:
+      - ms-network
+    restart: on-failure
+    depends_on:
+      - config-server
+      - service-registry
+      - mysql-db
+    environment:
+      server.port: 8080
+      eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+
+  employee-service:
+    image: employee-service:v1
+    ports:
+      - '8081:8081'
+    networks:
+      - ms-network
+    restart: on-failure
+    depends_on:
+      - config-server
+      - service-registry
+      - mysql-db
+    environment:
+      server.port: 8081
+      eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+
+  organization-service:
+    image: organization-service:v1
+    ports:
+      - '8083:8083'
+    networks:
+      - ms-network
+    restart: on-failure
+    depends_on:
+      - config-server
+      - service-registry
+      - mysql-db
+    environment:
+      server.port: 8083
+      eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+
+  react-frontend:
+    image: react-frontend:v1
+    ports:
+      - "3000:3000"
+    networks:
+      - ms-network
+
+networks:
+  ms-network:
+    name: ms-network
+    driver: bridge
+
+
