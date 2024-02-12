@@ -73,7 +73,7 @@
 
 
 ### Docker Compose
-- Queda pendiente la Dockerizacion de Micrometer & Zipkin
+- Despliega zipkin pero no escribe trace
 - Credenciales Docker : id gresshel, mail gresshel@gmail.com, pwd elieta103
 - Desde la raiz del proyecto : ...\_19-springboot-microservices-multimodule>
 - docker-compose up

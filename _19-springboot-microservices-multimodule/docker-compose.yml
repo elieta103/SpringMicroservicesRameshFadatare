@@ -57,6 +57,7 @@ services:
       - ms-network
     volumes:
       - ./init:/docker-entrypoint-initdb.d
+      - ./mysql_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: elieta103
       MYSQL_DATABASE: department_db
@@ -126,6 +127,29 @@ services:
     #image: react-frontend:v1
     ports:
       - "3000:3000"
+    networks:
+      - ms-network
+
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./rabbitmq/data/:/var/lib/rabbitmq/
+      - ./rabbitmq/log/:/var/log/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER = guest
+      - RABBITMQ_DEFAULT_PASS = guest
+    networks:
+      - ms-network
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
     networks:
       - ms-network
 
